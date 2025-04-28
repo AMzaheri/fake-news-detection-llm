@@ -1,6 +1,7 @@
 #
-./model/*
+/model/*
 # Byte-compiled / cache files
+/training/__pycache__/
 __pycache__/
 *.py[cod]
 *.ipynb_checkpoints
