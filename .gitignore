@@ -23,5 +23,5 @@ env/
 # Mac OS
 .DS_Store
 
-/model/
+/model/fine_tuned_model/*
 /model/fine_tuned_model.zip
