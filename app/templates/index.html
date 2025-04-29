@@ -1,0 +1,35 @@
+<!-- app/templates/index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake News Detector</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+
+<body>
+    <h1>Fake News Detection with LLM</h1>
+    <form method="POST">
+        <label for="news_text">Enter news text:</label><br>
+        <textarea name="news_text" required></textarea><br><br>
+        <button type="submit">Check</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            Prediction: <span style="color: {{ 'red' if prediction == 'FAKE' else 'green' }}">{{ prediction }}</span>
+        </div>
+    {% endif %}
+
+
+    <hr>
+    <div class="disclaimer">
+        <p><strong>Disclaimer:</strong> This model was fine-tuned on the 
+        <a href="https://onlineacademiccommunity.uvic.ca/isot/wp-content/uploads/sites/7295/2023/02/ISOT_Fake_News_Dataset_ReadMe.pdf" target="_blank">ISOT Fake News Dataset</a> 
+          (2017). It was trained for 5 epochs href="https://www.kaggle.com/code/afsanehm/fake-news-detection-with-llm-fine-tuning/edit/run/236815324" and may not generalize to recent or factual statements.</p>
+        <p>It detects linguistic patterns associated with fake vs. real news articles — it does <strong>not verify truthfulness</strong>.</p>
+    </div>
+</body>
+</html>
+
