@@ -128,7 +128,7 @@ Key packages:
 
 ---
 
-## ‍♀️ Author
+## ‍ Author
 
 Afsaneh Mohammadazaheri — [GitHub](https://github.com/AMzaheri)
 
