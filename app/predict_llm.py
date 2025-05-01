@@ -9,6 +9,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),\
              '..', 'model', 'fine_tuned_model'))
 
+
 # Load the fine-tuned model
 classifier = pipeline("text-classification",\
                        model=MODEL_PATH)
