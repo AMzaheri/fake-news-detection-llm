@@ -134,3 +134,24 @@ Afsaneh Mohammadazaheri — [GitHub](https://github.com/AMzaheri)
 
 Please share this work. Feedback welcome!
 
+
+## Deployment with Docker
+
+This project includes a Docker setup for running the Flask web app locally or on a server.
+
+###  Build the Docker image
+```bash
+docker build -t fake-news-llm-app .
+```
+
+###  Run the app
+```bash
+docker run -it -p 5000:5000 fake-news-llm-app
+```
+
+Then visit: [http://localhost:5000](http://localhost:5000)
+
+> ✅ Make sure the `model/` folder includes the saved fine-tuned model **and tokenizer files**.
+
+_This Docker image is meant for local use and prototyping.
+
