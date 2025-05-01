@@ -119,21 +119,6 @@ Key packages:
 
 ---
 
-##  Future Work
-
-- Improve model with more recent datasets
-- Integrate a GPT-based zero-shot classifier
-- Add feedback loop + explanation interface (e.g., LIME)
-- Deploy with Hugging Face Spaces or Render
-
----
-
-## ‍ Author
-
-Afsaneh Mohammadazaheri — [GitHub](https://github.com/AMzaheri)
-
-Please share this work. Feedback welcome!
-
 
 ## Deployment with Docker
 
@@ -155,3 +140,20 @@ Then visit: [http://localhost:5000](http://localhost:5000)
 
 _This Docker image is meant for local use and prototyping.
 
+---
+
+
+##  Future Work
+
+- Improve model with more recent datasets
+- Integrate a GPT-based zero-shot classifier
+- Add feedback loop + explanation interface (e.g., LIME)
+- Deploy with Hugging Face Spaces or Render
+
+---
+
+## ‍ Author
+
+Afsaneh Mohammadazaheri — [GitHub](https://github.com/AMzaheri)
+
+Please share this work. Feedback welcome!
