@@ -65,7 +65,7 @@ Training is run via:
 ```bash
 python training/run_llm_training.py
 ```
-Or in Kaggle notebook (see linked notebook URL).
+Or in Kaggle notebook [see linked notebook URL](https://www.kaggle.com/code/afsanehm/fake-news-detection-with-llm-fine-tuning).
 
 ---
 
