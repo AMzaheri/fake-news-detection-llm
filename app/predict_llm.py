@@ -6,13 +6,16 @@ import os
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 #MODEL_PATH = os.path.join(PROJECT_ROOT, '..',\
 #                          'model', 'fine_tuned_model')
-MODEL_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),\
-             '..', 'model', 'fine_tuned_model'))
 
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "..",\
+                 "model", "fine_tuned_model")
 
-# Load the fine-tuned model
-classifier = pipeline("text-classification",\
-                       model=MODEL_PATH)
+# load from local directory only
+classifier = pipeline(
+    "text-classification",
+    model=MODEL_PATH,
+    tokenizer=MODEL_PATH,
+    local_files_only=True  # NOT go to the hub
 
 def predict_news(text):
     """
