@@ -10,9 +10,10 @@ MODEL_PATH = os.path.join(PROJECT_ROOT, "model", "fine_tuned_model")
 #                          'model', 'fine_tuned_model')
 
 
-print("MODEL_PATH =", MODEL_PATH)
-print("Contents of fine_tuned_model:")
-print(os.listdir(MODEL_PATH))
+# comment any print
+#print("MODEL_PATH =", MODEL_PATH)
+#print("Contents of fine_tuned_model:")
+#print(os.listdir(MODEL_PATH))
 
 # load from local directory only
 #classifier = pipeline(
