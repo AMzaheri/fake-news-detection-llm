@@ -31,6 +31,8 @@ fake-news-detection-llm/
 │
 ├── data/                      ← Raw data (True.csv / Fake.csv)
 ├── model/                     ← Fine-tuned model (excluded from GitHub)
+├── scripts/         
+│   └── upload_to_hf.py        - Upload mfine tuned model to a Hugging Face repo
 ├── requirements.txt
 ├── README.md                 
 └── .gitignore
@@ -40,11 +42,17 @@ fake-news-detection-llm/
 
 ##  What This Project Does
 
-- Loads and prepares ISOT dataset (Real/Fake news)
-- Fine-tunes DistilBERT using Hugging Face `Trainer`
-- Saves the model and uses it for **inference**
-- Provides a **Flask app** to try out predictions
-- Includes **unit tests** and modular Python code
+- Loads and preprocesses the ISOT Fake News Dataset
+- Tokenizes and fine-tunes a DistilBERT transformer model using the 🤗 Hugging Face Trainer
+- Trains two versions of the model (5-epoch and 10-epoch) for comparison
+- Uploads the final model (with tokenizer) to Hugging Face Hub
+- Builds an interactive web app using Flask
+-  Deploys the app using Docker and Render.com
+- Provides a tabbed user interface with live prediction
+- Includes unit tests for dataset, tokenisation, and model functions
+-  Contains a Dockerfile for local or cloud containerisation
+-  Tracks training progress with TensorBoard
+- Codebase is modular and documented, following best practices
 
 ---
 
