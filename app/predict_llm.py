@@ -16,7 +16,7 @@ classifier = pipeline(
     model=MODEL_PATH,
     tokenizer=MODEL_PATH,
     local_files_only=True  # NOT go to the hub
-
+    )
 def predict_news(text):
     """
     Predict whether a news article is REAL or FAKE using the fine-tuned LLM.
