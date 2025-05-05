@@ -3,12 +3,16 @@ from transformers import pipeline
 import os
 
 # Define model path
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(PROJECT_ROOT, "model", "fine_tuned_model")
+#PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 #MODEL_PATH = os.path.join(PROJECT_ROOT, '..',\
 #                          'model', 'fine_tuned_model')
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "..",\
-                 "model", "fine_tuned_model")
+
+print("MODEL_PATH =", MODEL_PATH)
+print("Contents of fine_tuned_model:")
+print(os.listdir(MODEL_PATH))
 
 # load from local directory only
 classifier = pipeline(
