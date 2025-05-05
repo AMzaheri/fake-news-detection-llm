@@ -104,31 +104,6 @@ Covers:
 - Tokenisation
 - Model structure and prediction
 
----
-
-## Disclaimer
-
-> This model was fine-tuned on historical news articles (ISOT 2017) and is not guaranteed to be accurate on modern news or factual verification. It reflects **linguistic patterns**, not factual truth.
-
-
----
-
-## 📋 Requirements
-
-Install everything using:
-```bash
-pip install -r requirements.txt
-```
-
-Key packages:
-- `transformers`
-- `datasets`
-- `scikit-learn`
-- `Flask`
-- `torch`
-- `pandas`
-
----
 
 
 ## Deployment with Docker
@@ -160,7 +135,23 @@ Once you have fine-tuned your model, you can upload it to your Hugging Face acco
 python scripts/upload_to_hf.py
 ```
 
-### Requirements:
+
+## Requirements
+
+Install everything using:
+```bash
+pip install -r requirements.txt
+```
+
+Key packages:
+- `transformers`
+- `datasets`
+- `scikit-learn`
+- `Flask`
+- `torch`
+- `pandas`
+
+---
 
 Make sure you are logged in:
 
@@ -176,17 +167,17 @@ model/fine_tuned_model/
 and  pushes it to:  https://huggingface.co/afsanehm/fake-news-detection-llm
 
 
-##  Future Work
-
-- Improve model with more recent datasets
-- Integrate a GPT-based zero-shot classifier
-- Add feedback loop + explanation interface (e.g., LIME)
-- Deploy with Hugging Face Spaces or Render
+---
 
 ---
 
+## Disclaimer
+
+> This model was fine-tuned on historical news articles (ISOT 2017) and is not guaranteed to be accurate on modern news or factual verification. It reflects **linguistic patterns**, not factual truth.
+
+
+---
 ## ‍ Author
 
-Afsaneh Mohammadazaheri — [GitHub](https://github.com/AMzaheri)
+Afsaneh Mohammadazaheri 
 
-Please share this work. Feedback welcome!
