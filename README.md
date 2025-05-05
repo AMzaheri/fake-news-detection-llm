@@ -138,7 +138,7 @@ Then visit: [http://localhost:5000](http://localhost:5000)
 
 > ✅ Make sure the `model/` folder includes the saved fine-tuned model **and tokenizer files**.
 
-_This Docker image is meant for local use and prototyping.
+This Docker image is meant for local use and prototyping.
 
 ---
 
