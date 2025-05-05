@@ -1,6 +1,9 @@
-# Fake News Detection Using LLM 
+# End-to-End Fake News Detection App using LLM
 
-This project builds on Phase 1 (ML-based Fake News Detection) by fine-tuning a **DistilBERT transformer model** to detect fake news articles using the **ISOT Fake News Dataset**.
+Fine-tuned DistilBERT (on the ISOT dataset), deployed with Flask, Docker, and Render.
+
+This project fine-tunes a **DistilBERT transformer model** to classify news articles as REAL or FAKE using the **ISOT Fake News Dataset**.  
+It provides an interactive **Flask web app**, containerised with **Docker**, and deployed to **Render.com**.
 
 >  *This is an educational project — model predictions reflect linguistic patterns, not factual verification.*
 
@@ -136,11 +139,33 @@ docker run -it -p 5000:5000 fake-news-llm-app
 
 Then visit: [http://localhost:5000](http://localhost:5000)
 
-> ✅ Make sure the `model/` folder includes the saved fine-tuned model **and tokenizer files**.
-
+>  Make sure the `model/` folder includes the saved fine-tuned model **and tokenizer files**.
+ 
 This Docker image is meant for local use and prototyping.
 
 ---
+
+## Uploading Model to Hugging Face Hub
+
+Once you have fine-tuned your model, you can upload it to your Hugging Face account using the provided script:
+```bash
+python scripts/upload_to_hf.py
+```
+
+### Requirements:
+
+Make sure you are logged in:
+
+```bash
+huggingface-cli login
+```
+The upload script uses the directory:
+```bash
+model/fine_tuned_model/
+
+```
+
+and  pushes it to:  https://huggingface.co/afsanehm/fake-news-detection-llm
 
 
 ##  Future Work
