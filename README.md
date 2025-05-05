@@ -32,7 +32,7 @@ fake-news-detection-llm/
 ├── data/                      ← Raw data (True.csv / Fake.csv)
 ├── model/                     ← Fine-tuned model (excluded from GitHub)
 ├── scripts/         
-│   └── upload_to_hf.py        - Upload mfine tuned model to a Hugging Face repo
+│   └── upload_to_hf.py        - Upload model/ to Hugging Face
 ├── requirements.txt
 ├── README.md                 
 └── .gitignore
