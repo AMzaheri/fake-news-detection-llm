@@ -1,11 +1,6 @@
-# End-to-End Fake News Detection App using LLM
+#  Fake News Detection Using LLM — Local Flask App
 
-Fine-tuned DistilBERT (on the ISOT dataset), deployed with Flask, Docker, and Render.
-
-This project fine-tunes a **DistilBERT transformer model** to classify news articles as REAL or FAKE using the **ISOT Fake News Dataset**.  
-It provides an interactive **Flask web app**, containerised with **Docker**, and deployed to **Render.com**.
-
->  *This is an educational project — model predictions reflect linguistic patterns, not factual verification.*
+This project fine-tunes a **DistilBERT transformer model** on the [ISOT Fake News Dataset](https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/), builds an end-to-end pipeline, and serves predictions using a **Flask web app** running locally.
 
 ---
 
@@ -14,170 +9,140 @@ It provides an interactive **Flask web app**, containerised with **Docker**, and
 ```
 fake-news-detection-llm/
 │
-├── app/                        ← Flask app for prediction
-│   ├── app.py
-│   ├── predict_llm.py
-│   ├── templates/
-│   │   └── index.html
-│   └── static/
-│       └── style.css
+├── app/                        ← Flask app for local predictions
+│   ├── app_local_flask.py     ← Run this to launch local app
+│   ├── predict_llm_local_flask.py
+│   ├── templates/index.html
+│   └── static/style.css
 │
 ├── training/                  ← Model training pipeline
 │   ├── llm_model_module.py
 │   ├── run_llm_training.py
-│   └── tests/
-│       ├── test_data.py
-│       └── test_predict.py
+└── tests/
+│   ├── test_data.py
+│   └── test_predict.py
 │
-├── data/                      ← Raw data (True.csv / Fake.csv)
-├── model/                     ← Fine-tuned model (excluded from GitHub)
-├── scripts/         
-│   └── upload_to_hf.py        - Upload model/ to Hugging Face
+├── scripts/
+│   └── upload_to_hf.py        ← Upload fine-tuned model to Hugging Face
+│
+├── data/                      ← ISOT dataset (True.csv, Fake.csv)
+├── model/                     ← Fine-tuned model & tokenizer (excluded from GitHub)
 ├── requirements.txt
-├── README.md                 
+├── README.md
 └── .gitignore
 ```
 
 ---
 
-##  What This Project Does
+## What This Project Does
 
-- Loads and preprocesses the ISOT Fake News Dataset
-- Tokenizes and fine-tunes a DistilBERT transformer model using the 🤗 Hugging Face Trainer
-- Trains two versions of the model (5-epoch and 10-epoch) for comparison
-- Uploads the final model (with tokenizer) to Hugging Face Hub
-- Builds an interactive web app using Flask
--  Deploys the app using Docker and Render.com
-- Provides a tabbed user interface with live prediction
-- Includes unit tests for dataset, tokenisation, and model functions
--  Contains a Dockerfile for local or cloud containerisation
--  Tracks training progress with TensorBoard
-- Codebase is modular and documented, following best practices
+- Loads and preprocesses the ISOT dataset (real/fake news)
+- Fine-tunes a DistilBERT transformer model with Hugging Face Trainer
+- Saves both model weights and tokenizer to `model/fine_tuned_model/`
+- Offers two versions of the model: 5-epoch and 10-epoch
+- Builds a local Flask web app with:
+  - Prediction tab
+  - Disclaimer tab
+  - Model comparison (5 vs 10 epochs)
+- Uploads the model to Hugging Face Hub
 
 ---
 
-##  Dataset Citation
+## Training the Model
 
-This project uses the **ISOT Fake News Dataset**, created by the [ISOT Lab, University of Victoria](https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/).
+You can run the fine-tuning and save the model locally:
 
-- **Source**: [ISOT Dataset Page](https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/)
----
-
-## Model Training & Evaluation
-
-- Tokenizer: `DistilBertTokenizerFast`
-- Model: `DistilBertForSequenceClassification`
-- Framework: `transformers`, `datasets`, `Trainer`
-- Epochs: default = 5–10 (adjustable)
-- Evaluation: accuracy, precision, recall, F1
-- Live tracking: `TensorBoard` (logs/)
-
-Training is run via:
 ```bash
 python training/run_llm_training.py
 ```
-Or in Kaggle notebook [see linked notebook URL](https://www.kaggle.com/code/afsanehm/fake-news-detection-with-llm-fine-tuning).
 
----
+The trained model is saved to:
 
-##  Flask Web App (app/)
-
-Use the trained model in a Flask app to test predictions interactively.
-
-Start it locally:
 ```bash
-cd app
-python app.py
-```
-Then open `http://127.0.0.1:5000` in your browser.
-
----
-
-##  Unit Tests
-
-Unit tests are in `training/tests/`:
-```bash
-pytest training/tests/
-```
-Covers:
-- Data preparation
-- Tokenisation
-- Model structure and prediction
-
-
-
-## Deployment with Docker
-
-This project includes a Docker setup for running the Flask web app locally or on a server.
-
-###  Build the Docker image
-```bash
-docker build -t fake-news-llm-app .
+model/fine_tuned_model/
 ```
 
-###  Run the app
+You can also use the Kaggle notebook:
+
+[Kaggle Notebook](https://www.kaggle.com/code/afsanehm/fake-news-detection-with-llm-fine-tuning)
+
+Then download the model to:
+
 ```bash
-docker run -it -p 5000:5000 fake-news-llm-app
+model/fine_tuned_model/
 ```
 
-Then visit: [http://localhost:5000](http://localhost:5000)
+Alternatively, download it directly from [Hugging Face Hub](https://huggingface.co/afsanehm/fake-news-detection-llm)
 
->  Make sure the `model/` folder includes the saved fine-tuned model **and tokenizer files**.
- 
-This Docker image is meant for local use and prototyping.
+You can also upload your own version:
 
----
-
-## Uploading Model to Hugging Face Hub
-
-Once you have fine-tuned your model, you can upload it to your Hugging Face account using the provided script:
 ```bash
+huggingface-cli login
 python scripts/upload_to_hf.py
 ```
 
+---
 
-## Requirements
+## Unit Tests
 
-Install everything using:
+Run tests from the root:
+
+```bash
+pytest training/tests/
+```
+
+Tests cover:
+- Dataset loading and labelling
+- Tokenisation
+- Model prediction shapes
+
+---
+
+## Run the Flask App Locally
+
+Launch the app:
+
+```bash
+python app/app_local_flask.py
+```
+
+Then open in browser:
+
+```
+http://127.0.0.1:5000
+```
+
+### The App Interface Has:
+- **Tab 1**: Predict — enter a news article to classify as REAL or FAKE
+- **Tab 2**: Disclaimer — limitations of the model
+- **Tab 3**: Model Comparison — 5 vs 10 epoch notes
+
+---
+
+## Dataset
+
+This project uses the [ISOT Fake News Dataset](https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/).
+
+---
+
+##  Requirements
+
+Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
 Key packages:
-- `transformers`
-- `datasets`
-- `scikit-learn`
+- `transformers`, `datasets`, `torch`
+- `scikit-learn`, `pandas`
 - `Flask`
-- `torch`
-- `pandas`
-
----
-
-Make sure you are logged in:
-
-```bash
-huggingface-cli login
-```
-The upload script uses the directory:
-```bash
-model/fine_tuned_model/
-
-```
-
-and  pushes it to:  https://huggingface.co/afsanehm/fake-news-detection-llm
-
-
----
 
 ---
 
 ## Disclaimer
 
-> This model was fine-tuned on historical news articles (ISOT 2017) and is not guaranteed to be accurate on modern news or factual verification. It reflects **linguistic patterns**, not factual truth.
-
+> This model was trained on historical (2017) news articles. It may reflect **stylistic patterns**, not truth.  
+> It is not intended for factual verification or real-world misinformation detection.
 
 ---
-## ‍ Author
-
-Afsaneh Mohammadazaheri 
 
