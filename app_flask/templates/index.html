@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fake News Detection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+
+    /* Tabs */
+    .tab {
+      overflow: hidden;
+      border-bottom: 2px solid #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .tab button {
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+      float: left;
+      cursor: pointer;
+      padding: 14px 20px;
+      margin-right: 4px;
+      font-size: 16px;
+      min-width: 140px;
+    }
+
+    .tab button.active {
+      background-color: white;
+      border-bottom: 2px solid white;
+      font-weight: bold;
+    }
+
+    .tabcontent {
+      display: none;
+      padding: 1rem 0;
+    }
+
+    .result {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    function openTab(evt, tabName) {
+      let i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    window.onload = () => {
+      document.getElementById("defaultOpen").click();
+    };
+  </script>
+</head>
+
+<body>
+
+<h1>📰 Fake News Detection (LLM)</h1>
+
+<div class="tab">
+  <button class="tablink" id="defaultOpen" onclick="openTab(event, 'Predict')">Predict</button>
+  <button class="tablink" onclick="openTab(event, 'Disclaimer')">Disclaimer</button>
+  <button class="tablink" onclick="openTab(event, 'Comparison')">Model Comparison</button>
+</div>
+
+<!-- Predict tab -->
+<div id="Predict" class="tabcontent">
+  <form method="POST">
+    <label for="news_text">Paste news article:</label><br>
+    <textarea name="news_text" rows="10" cols="100" required></textarea><br><br>
+    <button type="submit">Check</button>
+  </form>
+  {% if prediction %}
+    <div class="result">
+      <strong>Prediction:</strong> 
+      <span style="color: {{ 'red' if prediction == 'FAKE' else 'green' }}">{{ prediction }}</span>
+    </div>
+  {% endif %}
+</div>
+
+<!-- Disclaimer tab -->
+<div id="Disclaimer" class="tabcontent">
+  <h3>⚠️ Disclaimer</h3>
+  <p>This app uses a transformer model trained on historical data from 2017 (ISOT Fake News Dataset).</p>
+  <ul>
+    <li>Predictions reflect <strong>linguistic patterns</strong>, not actual truth.</li>
+    <li>The model does not fact-check real-world statements.</li>
+    <li>Outputs should not be used as evidence or verification of factual content.</li>
+    <li>Always cross-check news sources independently.</li>
+  </ul>
+</div>
+
+<!-- Comparison tab -->
+<div id="Comparison" class="tabcontent">
+  <h3>🔍 Model Comparison: 5 vs 10 Epochs</h3>
+  <p>
+    I fine-tuned a DistilBERT model on the 
+    <a href="https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/" target="_blank">ISOT Fake News Dataset</a> 
+    using a <strong>Kaggle GPU notebook</strong>.  
+    You can view the training notebook <a href="https://www.kaggle.com/code/afsanehm/fake-news-detection-with-llm-fine-tuning" target="_blank">here</a>.
+  </p>
+  <p>
+    Two models were trained with the same architecture and data, but different training durations:
+  </p>
+  <ul>
+    <li><strong>5 Epochs:</strong> Faster, decent generalization</li>
+    <li><strong>10 Epochs:</strong> More confident predictions, small risk of overfitting</li>
+  </ul>
+
+  <h4>🧪 What did I observe?</h4>
+  <ul>
+    <li>Both models classified formal articles (even satirical ones like The Onion) as “REAL”.</li>
+    <li>Short snippets (even true ones) were sometimes classified as “FAKE”.</li>
+  </ul>
+
+  <h4>🔎 Why?</h4>
+  <ul>
+    <li>The ISOT dataset contains <strong>longer real news</strong> (from Reuters) and <strong>shorter fake ones</strong>.</li>
+    <li>Since I trained with <code>max_length=512</code>, the model likely picked up on structure and vocabulary length.</li>
+    <li>Without real-world or satire awareness, the model equates length/formality with authenticity.</li>
+  </ul>
+
+  <p><strong>💡 Takeaway:</strong> The model learns patterns — not truth. Use results as linguistic indicators, not facts.</p>
+</div>
+
+<hr>
+<footer style="margin-top: 2rem; font-size: 0.9rem; color: #555;">
+  🔗 Model available on <a href="https://huggingface.co/afsanehm/fake-news-detection-llm" target="_blank">Hugging Face</a>
+</footer>
+
+
+</body>
+</html>
+
