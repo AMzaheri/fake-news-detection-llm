@@ -1,3 +1,6 @@
+import os
+os.environ["HOME"] = "/tmp"
+
 import streamlit as st
 from tabs import predict_tab, disclaimer_tab, dashboard_tab
 
