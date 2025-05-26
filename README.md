@@ -146,3 +146,8 @@ Key packages:
 
 ---
 
+## App Versions
+
+- `app_flask/`: Local Flask app (v1.0)
+- `app_streamlit/`: [Coming soon] Streamlit version (v2.0)
+
