@@ -1,32 +1,45 @@
 #  Fake News Detection Using LLM — Local Flask App
 
-This project fine-tunes a **DistilBERT transformer model** on the [ISOT Fake News Dataset](https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/), builds an end-to-end pipeline, and serves predictions using a **Flask web app** running locally.
+
+This project fine-tunes a **DistilBERT transformer model** on the [ISOT Fake News Dataset](https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/), builds an end-to-end pipeline, and serves predictions through both a **Flask app** (v1.0) and a **Streamlit web app** (v2.0).
+
+> This repo includes **two versions**:
+> - v1.0: Flask web app for local use
+> - v2.0: Streamlit interface (deployable to Hugging Face Spaces)
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 fake-news-detection-llm/
 │
-├── app/                        ← Flask app for local predictions
-│   ├── app_local_flask.py     ← Run this to launch local app
-│   ├── predict_llm_local_flask.py
-│   ├── templates/index.html
-│   └── static/style.css
+├── app_flask/                 ← Flask app (v1.0)
+│   ├── app_local_flask.py
+│   └── predict_llm_local_flask.py
 │
-├── training/                  ← Model training pipeline
+├── app_streamlit/            ← Streamlit app (v2.0)
+│   ├── app.py
+│   ├── utils.py
+│   ├── tabs/
+│   │   ├── predict_tab.py
+│   │   ├── disclaimer_tab.py
+│   │   └── dashboard_tab.py
+│   └── run_app_streamlit.sh  ← run app locally
+│
+├── training/                 ← Model training pipeline
 │   ├── llm_model_module.py
-│   ├── run_llm_training.py
-└── tests/
+│   └── run_llm_training.py
+│
+├── tests/                    ← Unit tests
 │   ├── test_data.py
 │   └── test_predict.py
 │
 ├── scripts/
-│   └── upload_to_hf.py        ← Upload fine-tuned model to Hugging Face
+│   └── upload_to_hf.py
 │
-├── data/                      ← ISOT dataset (True.csv, Fake.csv)
-├── model/                     ← Fine-tuned model & tokenizer (excluded from GitHub)
+├── data/                     ← ISOT dataset (True.csv, Fake.csv)
+├── model/                    ← Fine-tuned model (excluded from GitHub)
 ├── requirements.txt
 ├── README.md
 └── .gitignore
@@ -39,18 +52,17 @@ fake-news-detection-llm/
 - Loads and preprocesses the ISOT dataset (real/fake news)
 - Fine-tunes a DistilBERT transformer model with Hugging Face Trainer
 - Saves both model weights and tokenizer to `model/fine_tuned_model/`
-- Offers two versions of the model: 5-epoch and 10-epoch
-- Builds a local Flask web app with:
-  - Prediction tab
-  - Disclaimer tab
-  - Model comparison (5 vs 10 epochs)
-- Uploads the model to Hugging Face Hub
+- Builds two interfaces for prediction:
+  - Flask-based (v1.0)
+  - Streamlit-based (v2.0)
+- Uploads model to Hugging Face Hub
+- Includes unit tests, modular structure, and documentation
 
 ---
 
 ## Training the Model
 
-You can run the fine-tuning and save the model locally:
+Run training locally:
 
 ```bash
 python training/run_llm_training.py
@@ -62,19 +74,15 @@ The trained model is saved to:
 model/fine_tuned_model/
 ```
 
-You can also use the Kaggle notebook:
+Alternatively, use the Kaggle notebook:
 
-[Kaggle Notebook](https://www.kaggle.com/code/afsanehm/fake-news-detection-with-llm-fine-tuning)
+ [Kaggle Notebook](https://www.kaggle.com/code/afsanehm/fake-news-detection-with-llm-fine-tuning)
 
-Then download the model to:
+Or download the model from Hugging Face:
 
-```bash
-model/fine_tuned_model/
-```
+ [Model on Hugging Face](https://huggingface.co/afsanehm/fake-news-detection-llm)
 
-Alternatively, download it directly from [Hugging Face Hub](https://huggingface.co/afsanehm/fake-news-detection-llm)
-
-You can also upload your own version:
+You can also upload your own model:
 
 ```bash
 huggingface-cli login
@@ -88,46 +96,55 @@ python scripts/upload_to_hf.py
 Run tests from the root:
 
 ```bash
-pytest training/tests/
+pytest tests/
 ```
 
-Tests cover:
-- Dataset loading and labelling
+Covers:
+- Dataset preparation
 - Tokenisation
-- Model prediction shapes
+- Model prediction
 
 ---
 
-## Run the Flask App Locally
+## Local App Options
 
-Launch the app:
+### Version 1: Run Flask App Locally
 
 ```bash
-python app/app_local_flask.py
+python app_flask/app_local_flask.py
 ```
-
-Then open in browser:
-
+Then visit:
 ```
 http://127.0.0.1:5000
 ```
 
-### The App Interface Has:
-- **Tab 1**: Predict — enter a news article to classify as REAL or FAKE
-- **Tab 2**: Disclaimer — limitations of the model
-- **Tab 3**: Model Comparison — 5 vs 10 epoch notes
+### Version 2: Run Streamlit App Locally
+
+```bash
+PYTHONPATH=. streamlit run app_streamlit/app.py
+```
+OR using the helper script:
+```bash
+bash app_streamlit/run_app_streamlit.sh
+```
+
+Tabs include:
+- Predict
+- Disclaimer
+- Dashboard (coming soon)
 
 ---
 
-## Dataset
+## Dataset Citation
 
 This project uses the [ISOT Fake News Dataset](https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/).
 
+
 ---
 
-##  Requirements
+## Requirements
 
-Install dependencies:
+Install all dependencies:
 ```bash
 pip install -r requirements.txt
 ```
@@ -135,19 +152,26 @@ pip install -r requirements.txt
 Key packages:
 - `transformers`, `datasets`, `torch`
 - `scikit-learn`, `pandas`
-- `Flask`
+- `Flask`, `streamlit`
 
 ---
 
 ## Disclaimer
 
-> This model was trained on historical (2017) news articles. It may reflect **stylistic patterns**, not truth.  
-> It is not intended for factual verification or real-world misinformation detection.
+> This model was trained on historical news (ISOT). It captures **linguistic patterns** and **structure**, not factual truth. It is not a fact-checking tool.
 
 ---
 
-## App Versions
+## ‍♀️ Author
 
-- `app_flask/`: Local Flask app (v1.0)
-- `app_streamlit/`: [Coming soon] Streamlit version (v2.0)
+**Afsaneh Mohammadazaheri**  
+[GitHub](https://github.com/AMzaheri)  
+[Kaggle Notebook](https://www.kaggle.com/code/afsanehm/fake-news-detection-with-llm-fine-tuning)
+
+---
+
+## 🚀 Project Phases
+
+- **v1.0**: Flask app with local model inference
+- **v2.0**: Streamlit interface, Hugging Face-hosted model, expandable for dashboards or deployment
 
