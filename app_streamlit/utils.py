@@ -22,6 +22,5 @@ def predict(text):
         "LABEL_1": "REAL"
     }
 
-    return label_map.get(raw_label, /
-           raw_label)  # fallback to raw label if unknown
+    return label_map.get(raw_label, raw_label)  # fallback to raw label if unknown
 
