@@ -1,4 +1,4 @@
-#  Fake News Detection Using LLM — Local Flask App
+#  Fake News Detection Using LLM
 
 
 This project fine-tunes a **DistilBERT transformer model** on the [ISOT Fake News Dataset](https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/), builds an end-to-end pipeline, and serves predictions through both a **Flask app** (v1.0) and a **Streamlit web app** (v2.0).
@@ -135,6 +135,9 @@ Tabs include:
 
 ---
 
+This app is also deployed on Hugging Face Spaces: [View Live Demo](https://huggingface.co/spaces/afsanehm/fake-news-detection-llm)
+
+
 ## Dataset Citation
 
 This project uses the [ISOT Fake News Dataset](https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/).
@@ -170,7 +173,7 @@ Key packages:
 
 ---
 
-## 🚀 Project Phases
+## Project Phases
 
 - **v1.0**: Flask app with local model inference
 - **v2.0**: Streamlit interface, Hugging Face-hosted model, expandable for dashboards or deployment
