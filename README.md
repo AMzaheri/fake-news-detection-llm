@@ -16,7 +16,7 @@ tags:
   - huggingface
 ---
 
-#  Fake News Detection Using LLM
+# Fake News Detection App (LLM + Streamlit)
 
 
 This project fine-tunes a **DistilBERT transformer model** on the [ISOT Fake News Dataset](https://onlineacademiccommunity.uvic.ca/isot/2022/11/27/fake-news-detection-datasets/), builds an end-to-end pipeline, and serves predictions through both a **Flask app** (v1.0) and a **Streamlit web app** (v2.0).
