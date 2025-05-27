@@ -182,13 +182,6 @@ Key packages:
 > This model was trained on historical news (ISOT). It captures **linguistic patterns** and **structure**, not factual truth. It is not a fact-checking tool.
 
 ---
-
-## ‍♀️ Author
-
-**Afsaneh Mohammadazaheri**  
-[GitHub](https://github.com/AMzaheri)  
-[Kaggle Notebook](https://www.kaggle.com/code/afsanehm/fake-news-detection-with-llm-fine-tuning)
-
 ---
 
 ## Project Phases
