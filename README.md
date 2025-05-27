@@ -42,8 +42,8 @@ fake-news-detection-llm/
 │   ├── tabs/
 │   │   ├── predict_tab.py
 │   │   ├── disclaimer_tab.py
-│   │   └── dashboard_tab.py
-│   └── run_app_streamlit.sh  ← run app locally
+│       └── dashboard_tab.py
+│── run_app_streamlit_locally.sh  ← run app locally
 │
 ├── training/                 ← Model training pipeline
 │   ├── llm_model_module.py
@@ -143,7 +143,7 @@ PYTHONPATH=. streamlit run app_streamlit/app.py
 ```
 OR using the helper script:
 ```bash
-bash app_streamlit/run_app_streamlit.sh
+bash ./run_app_streamlit_locally.sh
 ```
 
 Tabs include:
