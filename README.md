@@ -149,7 +149,7 @@ bash app_streamlit/run_app_streamlit.sh
 Tabs include:
 - Predict
 - Disclaimer
-- Dashboard (coming soon)
+- Dashboard
 
 ---
 
