@@ -1,21 +1,3 @@
----
-title: Fake News Detection LLM
-emoji: 📰
-colorFrom: red
-colorTo: pink
-sdk: streamlit
-sdk_version: "1.32.0"
-app_file: app_streamlit/app.py
-pinned: false
-license: mit
-tags:
-  - streamlit
-  - fake-news
-  - llm
-  - transformers
-  - huggingface
----
-
 #  Fake News Detection Using LLM
 
 
@@ -195,4 +177,24 @@ Key packages:
 
 - **v1.0**: Flask app with local model inference
 - **v2.0**: Streamlit interface, Hugging Face-hosted model, expandable for dashboards or deployment
+
+
+## Hugging Face configuration
+---
+title: Fake News Detection LLM
+emoji: 📰
+colorFrom: red
+colorTo: pink
+sdk: streamlit
+sdk_version: "1.32.0"
+app_file: app_streamlit/app.py
+pinned: false
+license: mit
+tags:
+  - streamlit
+  - fake-news
+  - llm
+  - transformers
+  - huggingface
+---
 
