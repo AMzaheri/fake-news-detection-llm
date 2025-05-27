@@ -1,3 +1,21 @@
+---
+title: Fake News Detection LLM
+emoji: 📰
+colorFrom: red
+colorTo: pink
+sdk: streamlit
+sdk_version: "1.32.0"
+app_file: app_streamlit/app.py
+pinned: false
+license: mit
+tags:
+  - streamlit
+  - fake-news
+  - llm
+  - transformers
+  - huggingface
+---
+
 #  Fake News Detection Using LLM
 
 
