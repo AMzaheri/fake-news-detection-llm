@@ -1,4 +1,3 @@
-## Hugging Face configuration
 ---
 title: Fake News Detection LLM
 emoji: 📰
