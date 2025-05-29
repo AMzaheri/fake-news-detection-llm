@@ -2,9 +2,6 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
-#def run():
-#    st.subheader("Monitoring Dashboard (Coming Soon)")
-#    st.info("This will show input stats, label distribution, or response times.")
 
 def run():
     st.header("Prediction Dashboard")
@@ -27,7 +24,7 @@ def run():
     st.altair_chart(pie_chart, use_container_width=True)
 
     # Calculate text lengths
-    #df["text_length"] = df["text"].apply(len)
+    df["text_length"] = df["text"].apply(len)
 
     st.subheader("Length of News Texts")
     st.write("Average Length:", int(df["text_length"].mean()))
