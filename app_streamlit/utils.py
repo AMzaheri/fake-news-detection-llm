@@ -3,6 +3,8 @@ from transformers import pipeline
 from datetime import datetime
 
 MODEL_ID = "afsanehm/fake-news-detection-llm"
+LOG_PATH = "prediction_log.csv"
+#------------------------------------------
 
 @st.cache_resource  # Persist across Streamlit reruns
 def load_pipeline():
@@ -25,15 +27,30 @@ def predict(text):
     return final_label
 
 #------------------------------------------
-def record_prediction(label, text):
-    if "history" not in st.session_state:
-        st.session_state.history = []
+#def record_prediction(label, text):
+#    if "history" not in st.session_state:
+#        st.session_state.history = []
+#
+#    st.session_state.history.append({
+#        "timestamp": datetime.now().isoformat(),
+#        "label": label,
+#        "text": text,
+#        "length": len(text.split())
+#    })
 
-    st.session_state.history.append({
-        "timestamp": datetime.now().isoformat(),
+
+def record_prediction(label, text):
+    row = {
+        "timestamp": datetime.utcnow().isoformat(),
         "label": label,
         "text": text,
-        "length": len(text.split())
-    })
+        "length": len(text)
+    }
 
+    # keep in session_state for immediate dashboards
+    st.session_state.setdefault("history", []).append(row)
+
+    # append to CSV so it survives restarts
+    header = not os.path.exists(LOG_PATH)
+    pd.DataFrame([row]).to_csv(LOG_PATH, mode="a", header=header, index=False)
 #------------------------------------------
