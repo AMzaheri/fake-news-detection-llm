@@ -1,4 +1,6 @@
 import os
+import pandas as pd
+
 os.environ["HOME"] = "/tmp"
 
 import streamlit as st
