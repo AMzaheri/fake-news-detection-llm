@@ -27,7 +27,7 @@ def run():
     st.altair_chart(pie_chart, use_container_width=True)
 
     # Calculate text lengths
-    df["text_length"] = df["text"].apply(len)
+    #df["text_length"] = df["text"].apply(len)
 
     st.subheader("Length of News Texts")
     st.write("Average Length:", int(df["text_length"].mean()))

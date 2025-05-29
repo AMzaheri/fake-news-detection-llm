@@ -3,7 +3,7 @@ os.environ["HOME"] = "/tmp"
 
 import streamlit as st
 from tabs import predict_tab, disclaimer_tab, dashboard_tab
-
+import utils
 #-------------------------------------------------
 if "history" not in st.session_state:
     if os.path.exists(utils.LOG_PATH):
