@@ -73,6 +73,8 @@ fake-news-detection-llm/
 - Builds two interfaces for prediction:
   - Flask-based (v1.0)
   - Streamlit-based (v2.0)
+  - Streamlit-based with dashboard (v2.1)
+  - Stable release of Streamlit-based app with dashboard (v2.1.1)
 - Uploads model to Hugging Face Hub
 - Includes unit tests, modular structure, and documentation
 
