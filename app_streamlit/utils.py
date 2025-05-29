@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from transformers import pipeline
+import pandas as pd
 from datetime import datetime
 
 MODEL_ID = "afsanehm/fake-news-detection-llm"
